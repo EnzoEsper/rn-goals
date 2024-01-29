@@ -12,8 +12,13 @@ export default function App() {
     setIsOpen(true);
   };
 
+  const endAddGoalHandler = () => {
+    setIsOpen(false);
+  };
+
   const addGoalHandler = (enteredGoalText) => {
     setGoals((prevState) => [...prevState, { id: Math.random().toString(), text: enteredGoalText }]);
+    endAddGoalHandler();
   };
 
   const deleteGoalHandler = (id) => {
@@ -25,7 +30,7 @@ export default function App() {
   return (
     <View style={styles.appContainer}>
       <Button title="Add New Goal" color="#5e0acc" onPress={startAddGoalHandler} />
-      <GoalInput onAddGoal={addGoalHandler} visible={isOpen} />
+      <GoalInput onAddGoal={addGoalHandler} visible={isOpen} onCancel={endAddGoalHandler} />
       <View style={styles.goalsContainer}>
         <FlatList
           data={goals}

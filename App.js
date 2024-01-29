@@ -6,6 +6,11 @@ import GoalInput from "./components/GoalInput";
 
 export default function App() {
   const [goals, setGoals] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const startAddGoalHandler = () => {
+    setIsOpen(true);
+  };
 
   const addGoalHandler = (enteredGoalText) => {
     setGoals((prevState) => [...prevState, { id: Math.random().toString(), text: enteredGoalText }]);
@@ -19,7 +24,8 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button title="Add New Goal" color="#5e0acc" onPress={startAddGoalHandler} />
+      <GoalInput onAddGoal={addGoalHandler} visible={isOpen} />
       <View style={styles.goalsContainer}>
         <FlatList
           data={goals}

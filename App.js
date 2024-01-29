@@ -28,21 +28,24 @@ export default function App() {
   };
 
   return (
-    <View style={styles.appContainer}>
-      <Button title="Add New Goal" color="#5e0acc" onPress={startAddGoalHandler} />
-      <GoalInput onAddGoal={addGoalHandler} visible={isOpen} onCancel={endAddGoalHandler} />
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={goals}
-          renderItem={(itemData) => {
-            return <GoalItem text={itemData.item.text} onDeleteItem={deleteGoalHandler} id={itemData.item.id} />;
-          }}
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
-        />
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <Button title="Add New Goal" color="#5e0acc" onPress={startAddGoalHandler} />
+        <GoalInput onAddGoal={addGoalHandler} visible={isOpen} onCancel={endAddGoalHandler} />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={goals}
+            renderItem={(itemData) => {
+              return <GoalItem text={itemData.item.text} onDeleteItem={deleteGoalHandler} id={itemData.item.id} />;
+            }}
+            keyExtractor={(item, index) => {
+              return item.id;
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
